@@ -23,6 +23,7 @@ ban = -1;
 iter = 0;
 
 while ban == -1
+    % tableau(A, b, c, B);   % Descomentar para imprimir el tableau en cada paso
     A_B = A(:, B);
     A_N = A(:, N);
     c_B = c(B);
@@ -41,7 +42,7 @@ while ban == -1
     He = A_B\A(:,N(e));
 
     aux = h ./ He;
-    aux(aux<0) = inf;
+    aux(He<=0) = NaN;
     [~, s] = min(aux);
     
     if He(s) <= 0

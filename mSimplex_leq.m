@@ -27,6 +27,7 @@ jB = (n+1:1:n+m)';
 [menor, s] = min(b);
 if menor < 0
     jB(s) = n+m+1;
+end
 
 [~, zoFaseI, ~, iterFaseI, B] = mSimplexFaseII_eq(AFaseI, b, cFaseI, jB);
 
