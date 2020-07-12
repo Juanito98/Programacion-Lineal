@@ -38,23 +38,26 @@ end
 % Resolvemos el problema auxiliar
 [~, zoFaseI, ~, iterFaseI, B] = mSimplexFaseII_eq(AFaseI, b, cFaseI, jB);
 
-% Si el problema auxiliar dio mayor a cero,
-% entonces el conjunto factible es vacío.
 if zoFaseI > 0
+    % Si el problema auxiliar dio mayor a cero,
+    % entonces el conjunto factible es vacío.
     ban = -1;
+    xo = NaN;
+    zo = NaN;
+    iter = NaN;
     return;
+else
+    % En caso de tener ya una SBF del problema original estándar
+    % Regresamos la matriz y los costos a la función original.
+    AFaseII = AFaseI(:, 1:n+m);
+    cFaseII = [c; zeros(m, 1)];
+
+    % Resolvemos el problema original con las variables de holgura
+    [xoFaseII, zo, ban, iterFaseII, ~] = mSimplexFaseII_eq(AFaseII, b, cFaseII, B);
+
+    % Solo nos importan las variables originales del problema.
+    xo = xoFaseII(1:n);
+    iter = iterFaseI + iterFaseII;
 end
-
-% En caso de tener ya una SBF del problema original estándar
-% Regresamos la matriz y los costos a la función original.
-AFaseII = AFaseI(:, 1:n+m);
-cFaseII = [c; zeros(m, 1)];
-
-% Resolvemos el problema original con las variables de holgura
-[xoFaseII, zo, ban, iterFaseII, ~] = mSimplexFaseII_eq(AFaseII, b, cFaseII, B);
-
-% Solo nos importan las variables originales del problema.
-xo = xoFaseII(1:n);
-iter = iterFaseI + iterFaseII;
 
 end

@@ -78,4 +78,14 @@ assert(norm(xo-[0; 3]) < epsilon);
 assert(zo == -6);
 assert(ban == 0);
 
+% Ejemplo conjunto factible vacío
+A = [1, -1; -1, 3];
+b = [-2; -1];
+c = [-1; -1];
+[xo, zo, ban, iter] = mSimplex_leq(A, b, c);
+assert(ban == -1);
+assert(isnan(xo));
+assert(isnan(zo));
+assert(isnan(iter));
+
 fprintf("Tests succeded.\n");
