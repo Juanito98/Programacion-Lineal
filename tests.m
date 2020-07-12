@@ -1,3 +1,7 @@
+% Script que corre ejercicios que hicimos en clase.
+% Sirven como unit tests para probar que los cambios que hagamos
+% no rompan el comportamiento del algoritmo.
+
 epsilon = 1e-9;
 
 % Ejemplo 2.3
