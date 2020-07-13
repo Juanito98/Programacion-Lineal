@@ -1,16 +1,22 @@
 % 2.3 Estudio empírico de complejidad con problemas aleatorios
 clear; close all; clc;
 
+% Creamos el número de casos
 casos = 50;
 
+% Inicializamos las variables que vamos a ocupar
 min_mn = zeros(casos, 1);
 iter = zeros(casos, 1);
 J_bounded = [];
 
 for i = 1:1:casos
+    % Generamos un problema de PL aleatorio
     [n, m, A, b, c] = generaProblemaAleatorio();
     min_mn(i) = min(n, m);
+    % Corremos el problema con nuestro método
     [~, ~, ban, iter(i)] = mSimplex_leq(A, b, c);
+
+    % Guardamos el caso en el que se encontró solución óptima
     if ban == 0
         J_bounded(end+1) = i;
     end
