@@ -28,7 +28,7 @@ m = length(b);
 AFaseI = [A, eye(m), -ones(m, 1)];
 cFaseI = [zeros(n+m, 1); 1];
 
-jB = (n+1:1:n+m)';
+jB = (n+1:n+m)';
 [menor, s] = min(b);
 % Cambiamos x_n+s por x_0 si bi < 0 para tener una SBF
 if menor < 0

@@ -1,7 +1,7 @@
 % 2.2 Complejidad exponencial
 clear; close all; clc;
 
-m = (3:1:10)';
+m = (3:10)';
 n = length(m);
 Iteraciones = zeros(n, 1);
 CPU_Time = zeros(n, 1);

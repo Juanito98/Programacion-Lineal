@@ -18,14 +18,14 @@ function [xo, zo, ban, iter, B] = mSimplexFaseII_eq(A, b, c, jB)
     
 n = length(c);
 B = jB;
-N = setdiff((1:1:n)', B);
+N = setdiff((1:n)', B);
 ban = -1;
 iter = 0;
 
 % Mientras no hayamos encontrado solución óptima
 % o una dirección de descenso no acotada ban = -1
 while ban == -1
-    % tableau(A, b, c, B);   % Descomentar para imprimir el tableau en cada paso
+    %tableau(A, b, c, B);   % Descomentar para imprimir el tableau en cada paso
     A_B = A(:, B);
     A_N = A(:, N);
     c_B = c(B);

@@ -9,7 +9,7 @@ min_mn = zeros(casos, 1);
 iter = zeros(casos, 1);
 J_bounded = [];
 
-for i = 1:1:casos
+for i = 1:casos
     % Generamos un problema de PL aleatorio
     [n, m, A, b, c] = generaProblemaAleatorio();
     min_mn(i) = min(n, m);

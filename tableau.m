@@ -10,7 +10,7 @@ function [] = tableau(A, b, c, jB)
 n = length(c);
 m = length(b);
 B = jB;
-N = setdiff((1:1:n)', B);
+N = setdiff((1:n)', B);
 
 A_B = A(:, B);
 A_N = A(:, N);
@@ -31,15 +31,15 @@ rr(N) = r_N;
 
 fprintf("\n");
 fprintf("#Ec| Base |");
-for i = 1:1:n
+for i = 1:n
     fprintf("\tx%d", i);
 end
 fprintf("\t| LD\n");
 fprintf("---------------------------------------------------------------------\n");
 
-for i = 1:1:m
+for i = 1:m
     fprintf(" %d |  x%d  |", i, B(i));
-    for j = 1:1:n
+    for j = 1:n
         fprintf("\t%.2f", AA(i, j));
     end
     fprintf("\t| %.2f", h(i));
@@ -48,7 +48,7 @@ end
 fprintf("---------------------------------------------------------------------\n");
 
 fprintf(" - |   z  |");
-for i = 1:1:n
+for i = 1:n
     fprintf("\t%.2f", rr(i));
 end
 fprintf("\t| %.2f\n", alfa);
