@@ -35,7 +35,8 @@ for i = 1:n
     fprintf("\tx%d", i);
 end
 fprintf("\t| LD\n");
-fprintf("---------------------------------------------------------------------\n");
+fprintf("%s", repmat('-', 1, 23 + 8*n));
+fprintf("\n");
 
 for i = 1:m
     fprintf(" %d |  x%d  |", i, B(i));
@@ -45,7 +46,8 @@ for i = 1:m
     fprintf("\t| %.2f", h(i));
     fprintf("\n");
 end
-fprintf("---------------------------------------------------------------------\n");
+fprintf("%s", repmat('-', 1, 23 + 8*n));
+fprintf("\n");
 
 fprintf(" - |   z  |");
 for i = 1:n
