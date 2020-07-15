@@ -29,6 +29,7 @@ AA(:, N) = H;
 rr = zeros(n, 1);
 rr(N) = r_N;
 
+% Imprimimos el header de la tabla
 fprintf("\n");
 fprintf("#Ec| Base |");
 for i = 1:n
@@ -38,6 +39,7 @@ fprintf("\t| LD\n");
 fprintf("%s", repmat('-', 1, 23 + 8*n));
 fprintf("\n");
 
+% Imprimimos la parte de x_B + Hx_N = h
 for i = 1:m
     fprintf(" %d |  x%d  |", i, B(i));
     for j = 1:n
@@ -49,6 +51,7 @@ end
 fprintf("%s", repmat('-', 1, 23 + 8*n));
 fprintf("\n");
 
+% Imprimimos la fila de z
 fprintf(" - |   z  |");
 for i = 1:n
     fprintf("\t%.2f", rr(i));

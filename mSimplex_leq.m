@@ -46,18 +46,18 @@ if zoFaseI > 0
     zo = NaN;
     iter = NaN;
     return;
-else
-    % En caso de tener ya una SBF del problema original estándar
-    % Regresamos la matriz y los costos a la función original.
-    AFaseII = AFaseI(:, 1:n+m);
-    cFaseII = [c; zeros(m, 1)];
-
-    % Resolvemos el problema original con las variables de holgura
-    [xoFaseII, zo, ban, iterFaseII, ~] = mSimplexFaseII_eq(AFaseII, b, cFaseII, B);
-
-    % Solo nos importan las variables originales del problema.
-    xo = xoFaseII(1:n);
-    iter = iterFaseI + iterFaseII;
 end
+
+% Tenemos ya una SBF del problema original estándar
+% Regresamos la matriz y los costos a la función original (estándar).
+AFaseII = AFaseI(:, 1:n+m);
+cFaseII = [c; zeros(m, 1)];
+
+% Resolvemos el problema original con las variables de holgura
+[xoFaseII, zo, ban, iterFaseII, ~] = mSimplexFaseII_eq(AFaseII, b, cFaseII, B);
+
+% Solo nos importan las variables originales del problema.
+xo = xoFaseII(1:n);
+iter = iterFaseI + iterFaseII;
 
 end
