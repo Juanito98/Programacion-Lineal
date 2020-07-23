@@ -5,26 +5,29 @@ clear; close all; clc;
 casos = 50;
 
 % Inicializamos las variables que vamos a ocupar
-min_mn = zeros(casos, 1);
+n = zeros(casos, 1);	
+m = zeros(casos, 1);	
+is_bounded = zeros(casos, 1);
 iter = zeros(casos, 1);
-J_bounded = [];
 
 for i = 1:casos
     % Generamos un problema de PL aleatorio
-    [n, m, A, b, c] = generaProblemaAleatorio();
-    nplusm(i)=n+m;
-    min_mn(i) = min(n, m);
+    [n(i), m(i), A, b, c] = generaProblemaAleatorio();
     % Corremos el problema con nuestro método
     [~, ~, ban, iter(i)] = mSimplex_leq(A, b, c);
-
     % Guardamos el caso en el que se encontró solución óptima
-    
     if ban == 0
-        J_bounded(end+1) = i;
+        is_bounded(i) = 1;
     end
 end
 
+T = table(n, m, iter, is_bounded)
+
+% Declaramos vectores que nos van a servir para graficar
+J_bounded = find(is_bounded == 1);
 J_notbounded = setdiff(1:casos, J_bounded);
+min_mn = min(n, m);
+nplusm = n + m;
 
 figure(1)
 
@@ -33,9 +36,9 @@ scatter( min_mn(J_bounded), iter(J_bounded), 'b', 'filled')
 hold on
 scatter( min_mn(J_notbounded), iter(J_notbounded), 'r', 's', 'filled')
 
- p = polyfit(log(min_mn),log(iter),1);
- z = polyval(p,log(min_mn));
- loglog(min_mn,exp(z))
+p = polyfit(log(min_mn),log(iter),1);
+z = polyval(p,log(min_mn));
+loglog(min_mn,exp(z))
  
 hold off
 
@@ -45,12 +48,10 @@ hold off
 %de p y C en Beta
 
 
-logiter=log(iter);
-logmin_mn=[ones(casos,1),log(min_mn)];
+logiter = log(iter);
+logmin_mn = [ones(casos,1),log(min_mn)];
 %Ejecuta la regresion lineal
-Betas1=logmin_mn\logiter
-
-
+Betas1 = logmin_mn\logiter
 
 
 %Correcciones al estilo de la grafica
@@ -69,19 +70,21 @@ grid on
 %instrucciones log(#it)=p*log(n+m)+ C y guardamos los valores estadisticos
 %de p y C en Beta
 
-figure(2)
-
-logiter=log(iter);
-lognplusm=[ones(casos,1),log(nplusm)'];
+logiter = log(iter);
+lognplusm = [ones(casos,1),log(nplusm)];
 %Ejecuta la regresion lineal
-Betas2=lognplusm\logiter
+Betas2 = lognplusm\logiter
+
+figure(2)
 
 scatter( nplusm(J_bounded), iter(J_bounded), 'b', 'filled')
 hold on
 scatter( nplusm(J_notbounded), iter(J_notbounded), 'r', 's', 'filled')
-p = polyfit(log(nplusm)',log(iter),1);
- z = polyval(p,log(nplusm));
- loglog(nplusm,exp(z))
+
+p = polyfit(log(nplusm),log(iter),1);
+z = polyval(p,log(nplusm));
+loglog(nplusm,exp(z))
+
 hold off
 
 title('Iteraciones vs m+n , Pruebas Aleatorias')
