@@ -14,3 +14,19 @@ for i = 1:n
 end
 
 T = table(m, Iteraciones, CPU_Time)
+
+figure(1)
+title("Iteraciones")
+hold on
+plot(m,Iteraciones)
+xlabel('m', 'fontsize', 14);
+ylabel('#it', 'fontsize', 14);
+hold off
+
+figure(2)
+title("CPU Time")
+hold on 
+xlabel('m', 'fontsize', 14);
+ylabel('Segundos', 'fontsize', 14);
+plot(m,CPU_Time)
+hold off
